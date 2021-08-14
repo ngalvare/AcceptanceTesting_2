@@ -24,10 +24,19 @@ def step_impl(context, name):
 	context.name = name
 
 
+@given('the user enters the study: {study}')
+def step_impl(context, study):
+	context.developer = str(study)
+
 @when("the user search games by {criteria}")
 def step_impl(context, criteria):
 	if(criteria == 'name'):
 		result, message = get_game_name(context.games, context.name)
+		print(result)
+		context.result = result
+		context.message = message
+	if (criteria == 'study'):
+		result, message = get_game_developer(context.games, context.developer)
 		print(result)
 		context.result = result
 		context.message = message
